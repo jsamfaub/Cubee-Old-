@@ -3,7 +3,7 @@ Cubee (pronounced Kyu-bay) is an experimental game prototype made with C++ and S
 I do plan to make it a somewhat full game some time in the future.
 
 # Gameplay video
-[blank.com]
+https://youtu.be/tom8Zjto_gI
 
 # Compiling
 Simply type "make" in the command line and the MakeFile will take care of it.
