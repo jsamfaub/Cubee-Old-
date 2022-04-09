@@ -10,6 +10,7 @@ Simply type "make" in the command line and the MakeFile will take care of it.
 
 # Player controls
 For player 1, you move with wasd, jump with c and punch with v.For player 2, you move with the arrow keys, jump with p and punch with o. The other players' controls aren't yet configured.
+No controls for other players.
 
 # Other controls
 q to quit
