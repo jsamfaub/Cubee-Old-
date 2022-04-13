@@ -460,8 +460,12 @@ void player::handleInput(SDL_Event& e)
 		else if (e.key.keysym.sym == punchKey)
 		{
 			if (!dead)
-				if (!punched)
+				if (!punched){
 					punch();
+#ifdef DEBUG
+					cout<<getPosX()<<endl;
+#endif
+				}
 		}
 		//case SDLK_w: vely -= walkingVel; break;
 		//case SDLK_s: vely += walkingVel; break;
@@ -570,7 +574,7 @@ bool player::getHit()
 {
 	if (!dead)
 	{
-		hp-=20;
+		hp-=4;
 		if (hp <= 0)
 		{
 			die();

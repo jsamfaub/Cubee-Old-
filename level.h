@@ -5,7 +5,7 @@ using namespace std;
 class level
 {
 public:
-	level(int width, int height);
+	level(string level);
 	~level();
 
 	bool loadBGTexture(string path);

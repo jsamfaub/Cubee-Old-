@@ -17,7 +17,7 @@ struct {
 	int h;
 	int numOfBlocks;
 	rect** blocks;
-} levelData;
+} data;
 void getData(string level){
 	fstream file;
 	file.open(level,ios::in);
@@ -36,50 +36,12 @@ void getData(string level){
 	}++y;
 	cout<<"val"<<x<<endl;
 	cout<<"val"<<y<<endl;
-	levelData.w=x*gTileSize;
-	levelData.h=y*gTileSize;
-	levelData.numOfBlocks=x*y;
-	levelData.blocks=(rect * *)malloc(sizeof(rect*) *levelData.numOfBlocks);
-	for(int i=0;i<levelData.numOfBlocks;i++){
-		levelData.blocks[i]=new rect;
-	}
-	file.clear();
-	file.seekg(0);
-	int posx=0,posy=0;
-	for(int i=0;i<levelData.numOfBlocks;i++) {
-		file>>ch;
-		if(posx%x==0&&posx!=0){
-			cout<<endl;
-			posx=0;
-			posy++;
-		}
-		if(ch=='n'){
-		cout<<endl;
-		i--;
-		continue;
-		}else{
-		switch(ch){
-			case '#':
-				levelData.blocks[i]->setw(gTileSize);
-				levelData.blocks[i]->seth(gTileSize);
-				levelData.blocks[i]->setCol(0xDD,0xDD,0xDD);
-				levelData.blocks[i]->setx(posx*gTileSize);
-				levelData.blocks[i]->sety(posy*gTileSize);
-				levelData.blocks[i]->fill();
-				cout<<'('<<posx<<','<<posy<<')'<<' ';
-				break;
-			case '0':
-			default:;
-		}
-		posx++;
-#ifdef DEBUG
- 		cout<<'('<<posx<<", "<<posy<<')'<<ch;
-#endif
-
+	data.w=x*gTileSize;
+	data.h=y*gTileSize;
+	for(int i=0;i<y;i++) {
+		for(int j=0;j<x;j++) {
 		}
 	}
-	cout<<"W: "<<levelData.w<<endl;
-	cout<<"H: "<<levelData.h<<endl;
 
 	file.close();
 }
@@ -87,7 +49,6 @@ void getData(string level){
 level::level(string level)
 {
 	getData(level);
-	/*
 	int width=1000;
 	int height=1000;
 	numOfBlocks = 100;
@@ -151,12 +112,9 @@ level::level(string level)
 	blocks[7]->setx(0);
 	blocks[7]->sety(blocks[5]->gety() - 5*gTileSize);
 	blocks[7]->fill();
-	*/
-	blocks=levelData.blocks;
-	numOfBlocks=levelData.numOfBlocks;
 
 	bgTexture = NULL;
-	w = levelData.w, h = levelData.h;
+	w = width, h = height;
 	levelMusic = NULL;
 
 	SDL_Rect bgDest = { 0,0,0,0 };

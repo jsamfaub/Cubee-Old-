@@ -22,10 +22,10 @@ int gTileSize = 50;
 
 SDL_Renderer* mRenderer = NULL;
 LWindow gWindow[TOTAL_WINDOWS];
-int screenwidth = 1920;
-int screenheight = 1080;
-int levelwidth = 5760;
-int levelheight = 1080;
+int screenwidth = 1920;//1280;
+int screenheight = 1080;//720;
+int levelwidth = 500;
+int levelheight = 1000;
 int scoreLimit = 25;
 
 int main(void)
@@ -36,6 +36,7 @@ int main(void)
 	}
 	else
 	{
+		//gTileSize=screenwidth/38.4;
 		mRenderer = gWindow[0].getRenderer();
 
 		ui interface("data/graphics/ui/test002.png", "data/graphics/ui/blue.bmp");
@@ -43,7 +44,7 @@ int main(void)
 		player::loadHealthBar();
 		player::loadExplosionTexture();
 
-		level *currentLevel = new level(levelwidth, levelheight);
+		level *currentLevel = new level("data/levels/level1.lvl");
 		currentLevel->loadBGTexture("data/graphics/backgrounds/test003.png");
 		currentLevel->loadMusic("data/music/levelmusic.mp3");
 		currentLevel->playMusic();
