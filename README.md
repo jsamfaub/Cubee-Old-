@@ -1,4 +1,5 @@
 # Cubee
+![](https://github.com/jsamfaub/Cubee/blob/master/data/cubee%20logo.png)
 Cubee (pronounced Kyu-bay) is an experimental game prototype made with C++ and SDL2 to test different features of SDL2.
 I do plan to make it a somewhat full game some time in the future.
 
