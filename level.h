@@ -22,7 +22,9 @@ public:
 	void close();
 
 	int w, h;
+	entity** getEntities();
 private:
+	entity** entities;
 	SDL_Texture* bgTexture;
 	SDL_Rect bgDest;
 	Mix_Music* levelMusic;

@@ -1,43 +1,16 @@
-val8
-val20
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(6,10) (7,10) 
-
-
-
-
-
-
-(8,13) 
-(1,14) (2,14) (3,14) (4,14) (5,14) (6,14) 
-
-
-
-
-
-
-
-
-(8,18) 
-(2,19) (4,19) (6,19) W: 400
-H: 1000
-Couldn't open 'data/music/levelmusic.mp3'
+g++ --no-warnings main.cpp background.cpp close.cpp init.cpp checkCollision.cpp entity.cpp level.cpp LTimer.cpp LWindow.cpp player.cpp rect.cpp Tile.cpp ui.cpp -lSDL2 -lSDL2_image -lSDL2_mixer -o cubee
+level.cpp: In function ‘void getData(std::string)’:
+level.cpp:80:55: error: no matching function for call to ‘std::vector<entityInfo>::push_back()’
+   80 |                                 entitiesInfo.push_back();
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /usr/include/c++/11.2.0/vector:67,
+                 from level.cpp:9:
+/usr/include/c++/11.2.0/bits/stl_vector.h:1187:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = entityInfo; _Alloc = std::allocator<entityInfo>; std::vector<_Tp, _Alloc>::value_type = entityInfo]’
+ 1187 |       push_back(const value_type& __x)
+      |       ^~~~~~~~~
+/usr/include/c++/11.2.0/bits/stl_vector.h:1187:7: note:   candidate expects 1 argument, 0 provided
+/usr/include/c++/11.2.0/bits/stl_vector.h:1203:7: note: candidate: ‘void std::vector<_Tp, _Alloc>::push_back(std::vector<_Tp, _Alloc>::value_type&&) [with _Tp = entityInfo; _Alloc = std::allocator<entityInfo>; std::vector<_Tp, _Alloc>::value_type = entityInfo]’
+ 1203 |       push_back(value_type&& __x)
+      |       ^~~~~~~~~
+/usr/include/c++/11.2.0/bits/stl_vector.h:1203:7: note:   candidate expects 1 argument, 0 provided
+make: *** [Makefile:6: all] Error 1

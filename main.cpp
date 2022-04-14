@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include "main.h"
+#include "entity.h"
 #include "init.h"
 #include "close.h"
 #include "rect.h"
@@ -27,6 +28,8 @@ int screenheight = 1080;//720;
 int levelwidth = 500;
 int levelheight = 1000;
 int scoreLimit = 25;
+entity** entities=NULL;
+int numOfEntities=0;
 
 int main(void)
 {
@@ -48,6 +51,10 @@ int main(void)
 		currentLevel->loadBGTexture("data/graphics/backgrounds/test003.png");
 		currentLevel->loadMusic("data/music/levelmusic.mp3");
 		currentLevel->playMusic();
+
+		entity* enemy=new entity(50,50,100,100);
+		enemy->setTexturePath("data/graphics/entities/enemies/red.png");
+
 
 		int numOfPlayers = 4;
 		player *players[] = {new player(1, screenwidth/2, screenheight/2),
@@ -109,6 +116,7 @@ int main(void)
 					{
 					case SDLK_q: over = 1; break;
 					case SDLK_1: gWindow[0].focus(); break;
+					case SDLK_2: enemy->printInfo();break;
 					}
 				}
 
@@ -191,6 +199,11 @@ int main(void)
 					currentLevel->renderBG(players[i]->getCamera());
 
 					currentLevel->renderBlocks(players[i]->getCamera().x, players[i]->getCamera().y);
+
+					enemy->renderEntity(400-players[i]->getCamera().x,900-players[i]->getCamera().y);
+					for(int j=0;j<numOfEntities;j++){
+						entities[j]->renderEntity(entities[j]->getx()-players[i]->getCamera().x,entities[j]->gety()-players[i]->getCamera().y);
+					}
 					for (int j = 0; j < numOfPlayers; j++)
 					{
 						players[j]->render(players[j]->getPosX() - players[i]->getCamera().x, players[j]->getPosY() - players[i]->getCamera().y);
@@ -198,6 +211,7 @@ int main(void)
 					interface.render(players[i]->getScore());
 				}
 			}
+
 			SDL_RenderPresent(mRenderer);
 
 			bool allWindowsClosed = 1;

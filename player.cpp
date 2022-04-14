@@ -462,9 +462,8 @@ void player::handleInput(SDL_Event& e)
 			if (!dead)
 				if (!punched){
 					punch();
-#ifdef DEBUG
-					cout<<getPosX()<<endl;
-#endif
+					cout<<"x:"<<getPosX()<<endl;
+					cout<<"y:"<<getPosY()<<endl;
 				}
 		}
 		//case SDLK_w: vely -= walkingVel; break;

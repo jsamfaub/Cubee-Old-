@@ -6,11 +6,22 @@
 #include "entity.h"
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 extern SDL_Renderer* mRenderer;
 extern int gTileSize;
 extern int levelwidth;
+extern int numOfEntities;
+extern entity** entities;
+struct entityInfo{
+	int x;
+	int y;
+	int w;
+	int h;
+	char type;
+};
+vector<entityInfo> entitiesInfo;
 
 struct {
 	int w;
@@ -58,15 +69,33 @@ void getData(string level){
 		i--;
 		continue;
 		}else{
+		bool colorSet=false;
 		switch(ch){
+			case 'e':
+				entityInfo temp;
+				temp.x=posx;
+				temp.y=posy;
+				temp.w=50;
+				temp.h=50;
+				temp.type='e';
+				entitiesInfo.push_back(temp);
+				break;
+			case 'r':
+				if(!colorSet){colorSet=true;levelData.blocks[i]->setCol(0xFF,0x00,0x00);}
+			case 'g':
+				if(!colorSet){colorSet=true;levelData.blocks[i]->setCol(0x00,0xFF,0x00);}
+			case 'b':
+				if(!colorSet){colorSet=true;levelData.blocks[i]->setCol(0x00,0x00,0xFF);}
+			case 'y':
+				if(!colorSet){colorSet=true;levelData.blocks[i]->setCol(0xFF,0xFF,0x00);}
 			case '#':
+				if(!colorSet){colorSet=true;levelData.blocks[i]->setCol(0xDD,0xDD,0xDD);}
+
 				levelData.blocks[i]->setw(gTileSize);
 				levelData.blocks[i]->seth(gTileSize);
-				levelData.blocks[i]->setCol(0xDD,0xDD,0xDD);
 				levelData.blocks[i]->setx(posx*gTileSize);
 				levelData.blocks[i]->sety(posy*gTileSize);
 				levelData.blocks[i]->fill();
-				cout<<'('<<posx<<','<<posy<<')'<<' ';
 				break;
 			case '0':
 			default:;
@@ -82,6 +111,16 @@ void getData(string level){
 	cout<<"H: "<<levelData.h<<endl;
 
 	file.close();
+	for(int i=0;i<entitiesInfo.size();i++){
+		if(entities==NULL){
+			entities=(entity**)malloc(sizeof(entity*)*entitiesInfo.size());
+		}
+		entities[i]=new entity(entitiesInfo[i].w,entitiesInfo[i].h,entitiesInfo[i].x*gTileSize,entitiesInfo[i].y*gTileSize);
+		entities[i]->setTexturePath("data/graphics/entities/enemies/red.png");
+		numOfEntities++;
+		cout<<"entx"<<entities[i]->getx()<<endl;
+		cout<<"enty"<<entities[i]->gety()<<endl;
+	}
 }
 
 level::level(string level)

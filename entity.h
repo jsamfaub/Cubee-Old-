@@ -20,6 +20,7 @@ public:
 
 	void setTexturePath(char*path);
 	void renderEntity(int x, int y);
+	void printInfo();
 private:
 	SDL_Texture *entityTexture = NULL;
 	int posx, posy;

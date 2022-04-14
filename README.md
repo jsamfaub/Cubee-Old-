@@ -11,7 +11,7 @@ The height and width of the level will be calculated automatically based on this
 Have fun with this feature!
 
 # Gameplay video
-https://youtu.be/tom8Zjto_gI
+https://www.youtube.com/watch?v=BH6g9s3bn-0
 
 # Compiling
 Simply type "make" in the command line and the MakeFile will take care of it.
