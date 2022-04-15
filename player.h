@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
+#include "entity.h"
 #include "rect.h"
 #include "LTimer.h"
-#include "entity.h"
 #include "gdefines.h"
 class player
 {

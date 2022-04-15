@@ -19,25 +19,24 @@ void entity::setTexturePath(char*path) {
 	SDL_FreeSurface(surface);
 }
 void entity::printInfo(){
-	cout<<"rect.x"<<rect.x<<endl;
-	cout<<"rect.y"<<rect.y<<endl;
+	cout<<"rect.x"<<rectangle.x<<endl;
+	cout<<"rect.y"<<rectangle.y<<endl;
 	cout<<"x:"<<posx<<endl;
 	cout<<"y:"<<posy<<endl;
 	cout<<"w:"<<width<<endl;
 	cout<<"h:"<<height<<endl;
-	cout<<"rectxywh:"<<rect.x<<rect.y<<rect.w<<rect.w<<endl;
 }
 void entity::renderEntity(int x, int y) {
-	rect.x = x;
-	rect.y = y;
-	SDL_RenderCopy(mRenderer, entityTexture, NULL, &rect);
+	rectangle.x = x;
+	rectangle.y = y;
+	SDL_RenderCopy(mRenderer, entityTexture, NULL, &rectangle);
 }
 entity::entity(int w, int h, int x, int y)
 {
-	rect.w =width=w;
-	rect.h =height=h;
-	rect.x = posx = x;
-	rect.y = posy = y;
+	rectangle.w =width=w;
+	rectangle.h =height=h;
+	rectangle.x = posx = x;
+	rectangle.y = posy = y;
 }
 
 void entity::setw(int w)
@@ -52,12 +51,12 @@ void entity::seth(int h)
 
 void entity::setx(int x)
 {
-	rect.x = posx = x;
+	rectangle.x = posx = x;
 }
 
 void entity::sety(int y)
 {
-	rect.y = posy = y;
+	rectangle.y = posy = y;
 }
 
 int entity::getw()
@@ -88,4 +87,59 @@ SDL_Rect& entity::getCollider()
 	collider.h = height;
 
 	return collider;
+}
+
+bool entity::near(int playerx,int playery,int distanceParameter){
+	if( abs(posx-playerx)<=distanceParameter&&abs(posy-playery)<=distanceParameter) {
+		return true;
+	}else
+		return false;
+}
+void entity::followPlayer(int x,int y){
+	if(posx<x){
+		velx=walkingVel;
+	}else if(posx>x){
+		velx=-walkingVel;
+	}else{
+		velx=0;
+	}
+}
+void entity::move(int numOfBlocks,rect** blocks){
+	posx+=velx;
+	//for(int i=0;i<numOfBlocks;i++){
+	//	if(collidedOver(blocks[i])){
+	//		return;
+	//	}
+	//}
+	//posy+=vely;
+	return;
+}
+bool entity::collidedOver(rect* block){
+	if((posy+height)+1==block->gety()){
+		if(posx>block->getx()+block->getw()){
+			return false;
+		}
+		if(posx+width<block->getx()){
+			return false;
+		}
+		return true;
+	}else{
+		return false;
+	}
+	return false;
+}
+bool entity::hitBy(entity *e){
+	if( (posx+width)<e->getx() ){
+		return false;
+	}
+	if( posx>(e->getx()+e->getw()) ){
+		return false;
+	}
+	if( (posy+height)<e->gety() ){
+		return false;
+	}
+	if( posy>(e->gety()+e->geth()) ){
+		return false;
+	}
+	return true;
 }

@@ -1,0 +1,4 @@
+logic:
+player with reference
+if(entity.collide(player)) ;
+if(entity.near(player,distance)) ;

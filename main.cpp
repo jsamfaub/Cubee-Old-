@@ -147,18 +147,27 @@ int main(void)
 			{
 				for (int j = 0; j < numOfPlayers; j++)
 				{
-					if(players[j]->getArmEnt() != NULL)
+					if(players[j]->getArmEnt() != NULL){
+					for(int k=0;k<numOfEntities;k++){
+						if(entities[k]!=NULL)
+						if(entities[k]->hitBy(players[j]->getArmEnt())){
+						players[j]->scoreUp();
+						delete entities[k];
+						entities[k]=NULL;
+						}
+					}
 					if (checkCollision(players[i]->getCollider(), players[j]->getArmEnt()->getCollider()))
-					{
-						if (players[i]->playerId != players[j]->playerId)
 						{
-							bool dead = 0;
-							dead = players[i]->getHit();
-							delete players[j]->getArmEnt();
-							players[j]->getArmEnt() = NULL;
-							if(dead)
-							players[j]->scoreUp();
-							interface.inputScore(players[j]->getScore());
+							if (players[i]->playerId != players[j]->playerId)
+							{
+								bool dead = 0;
+								dead = players[i]->getHit();
+								delete players[j]->getArmEnt();
+								players[j]->getArmEnt() = NULL;
+								if(dead)
+								players[j]->scoreUp();
+								interface.inputScore(players[j]->getScore());
+							}
 						}
 					}
 				}
@@ -167,6 +176,16 @@ int main(void)
 
 			for (int i = 0; i < numOfPlayers; i++)
 			{
+				for(int j=0;j<numOfEntities;j++){
+					if(entities[j]!=NULL){
+						if(entities[j]->near(players[i]->getPosX(),players[i]->getPosY(),gTileSize*5)){
+							/*delete entities[j];
+							entities[j]=NULL;*/
+							entities[j]->followPlayer(players[i]->getPosX(),players[i]->getPosY());
+							entities[j]->move(currentLevel->getBlockNum(),currentLevel->getBlocks());
+						}
+					}
+				}
 				players[i]->getCamera().x = (players[i]->getPosX() + (players[i]->getw() / 2)) - players[i]->getViewport().w / 2;
 				players[i]->getCamera().y = (players[i]->getPosY() + (players[i]->geth() / 2)) - players[i]->getViewport().h / 2;
 
@@ -202,7 +221,7 @@ int main(void)
 
 					enemy->renderEntity(400-players[i]->getCamera().x,900-players[i]->getCamera().y);
 					for(int j=0;j<numOfEntities;j++){
-						entities[j]->renderEntity(entities[j]->getx()-players[i]->getCamera().x,entities[j]->gety()-players[i]->getCamera().y);
+						if(entities[j]!=NULL)entities[j]->renderEntity(entities[j]->getx()-players[i]->getCamera().x,entities[j]->gety()-players[i]->getCamera().y);
 					}
 					for (int j = 0; j < numOfPlayers; j++)
 					{

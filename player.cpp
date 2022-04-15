@@ -336,7 +336,8 @@ void player::move(int levelwidth, int levelheight, int numOfBlocks, rect**blocks
 			}
 			else
 			{
-				posy -= jumpVel;
+				//posy -= jumpVel*(((jumpTimer.getTicks()-jumpTime)*(jumpTimer.getTicks()-jumpTime))/((jumpTime*jumpTime)/10));
+				posy-=jumpVel;
 			}
 		}
 		else
