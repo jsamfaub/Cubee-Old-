@@ -24,16 +24,18 @@ public:
 	void renderEntity(int x, int y);
 	void printInfo();
 	void followPlayer(int x,int y);
-	void move(int numOfBlocks, rect** blocks);
+	void move(rect** blocks,int numOfBlocks);
 	bool hitBy(entity *arm);
 	bool collidedOver(rect *block);
+	void ground(rect** blocks,int numOfBlocks);
+	void fall();
 private:
 	SDL_Texture *entityTexture = NULL;
 	int posx, posy;
-	int velx, vely=10;
+	int velx, vely=0;
 	int width, height;
 	SDL_Rect collider;
-	int walkingVel=2;
-	int fallingVel=10;
+	int walkingVel=1;
+	int fallingVel=1;
 };
 

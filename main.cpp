@@ -178,12 +178,15 @@ int main(void)
 			{
 				for(int j=0;j<numOfEntities;j++){
 					if(entities[j]!=NULL){
+						entities[j]->fall();
 						if(entities[j]->near(players[i]->getPosX(),players[i]->getPosY(),gTileSize*5)){
 							/*delete entities[j];
 							entities[j]=NULL;*/
 							entities[j]->followPlayer(players[i]->getPosX(),players[i]->getPosY());
-							entities[j]->move(currentLevel->getBlockNum(),currentLevel->getBlocks());
 						}
+						entities[j]->move(currentLevel->getBlocks(),currentLevel->getBlockNum());
+
+						entities[j]->ground(currentLevel->getBlocks(),currentLevel->getBlockNum());
 					}
 				}
 				players[i]->getCamera().x = (players[i]->getPosX() + (players[i]->getw() / 2)) - players[i]->getViewport().w / 2;

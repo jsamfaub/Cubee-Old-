@@ -1,0 +1,59 @@
+g++ --no-warnings main.cpp background.cpp close.cpp init.cpp checkCollision.cpp entity.cpp level.cpp LTimer.cpp LWindow.cpp player.cpp rect.cpp Tile.cpp ui.cpp -lSDL2 -lSDL2_image -lSDL2_mixer -o cubee
+In file included from entity.h:3,
+                 from main.cpp:8:
+player.h:63:9: error: ‘entity’ does not name a type
+   63 |         entity*& getArmEnt();
+      |         ^~~~~~
+player.h:111:9: error: ‘entity’ does not name a type
+  111 |         entity* armEnt;
+      |         ^~~~~~
+main.cpp: In function ‘int main()’:
+main.cpp:150:56: error: ‘class player’ has no member named ‘getArmEnt’
+  150 |                                         if(players[j]->getArmEnt() != NULL){
+      |                                                        ^~~~~~~~~
+main.cpp:153:83: error: ‘class player’ has no member named ‘getArmEnt’
+  153 |                                                 if(entities[k]->hitBy(players[j]->getArmEnt())){
+      |                                                                                   ^~~~~~~~~
+main.cpp:159:99: error: ‘class player’ has no member named ‘getArmEnt’
+  159 |                                         if (checkCollision(players[i]->getCollider(), players[j]->getArmEnt()->getCollider()))
+      |                                                                                                   ^~~~~~~~~
+main.cpp:165:84: error: ‘class player’ has no member named ‘getArmEnt’
+  165 |                                                                 delete players[j]->getArmEnt();
+      |                                                                                    ^~~~~~~~~
+main.cpp:166:77: error: ‘class player’ has no member named ‘getArmEnt’
+  166 |                                                                 players[j]->getArmEnt() = NULL;
+      |                                                                             ^~~~~~~~~
+In file included from player.h:3,
+                 from init.cpp:6:
+entity.h:28:49: error: ‘player’ has not been declared
+   28 |         void move(rect** blocks,int numOfBlocks,player**);
+      |                                                 ^~~~~~
+In file included from entity.h:3,
+                 from entity.cpp:3:
+player.h:52:16: error: ‘Mix_Chunk’ does not name a type
+   52 |         static Mix_Chunk* punchSound;
+      |                ^~~~~~~~~
+player.h:53:16: error: ‘Mix_Chunk’ does not name a type
+   53 |         static Mix_Chunk* explodeSound;
+      |                ^~~~~~~~~
+player.h:63:9: error: ‘entity’ does not name a type
+   63 |         entity*& getArmEnt();
+      |         ^~~~~~
+player.h:111:9: error: ‘entity’ does not name a type
+  111 |         entity* armEnt;
+      |         ^~~~~~
+In file included from entity.h:3,
+                 from level.h:3,
+                 from level.cpp:5:
+player.h:63:9: error: ‘entity’ does not name a type
+   63 |         entity*& getArmEnt();
+      |         ^~~~~~
+player.h:111:9: error: ‘entity’ does not name a type
+  111 |         entity* armEnt;
+      |         ^~~~~~
+In file included from player.h:3,
+                 from player.cpp:5:
+entity.h:28:49: error: ‘player’ has not been declared
+   28 |         void move(rect** blocks,int numOfBlocks,player**);
+      |                                                 ^~~~~~
+make: *** [Makefile:6: all] Error 1

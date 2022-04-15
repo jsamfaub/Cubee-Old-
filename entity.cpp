@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include "entity.h"
 #include <iostream>
+#include "checkCollision.h"
 using namespace std;
 extern SDL_Renderer* mRenderer;
 extern int gTileSize;
@@ -104,14 +105,14 @@ void entity::followPlayer(int x,int y){
 		velx=0;
 	}
 }
-void entity::move(int numOfBlocks,rect** blocks){
+void entity::move(rect** blocks, int numOfBlocks){
 	posx+=velx;
-	//for(int i=0;i<numOfBlocks;i++){
-	//	if(collidedOver(blocks[i])){
-	//		return;
-	//	}
-	//}
-	//posy+=vely;
+	for(int i=0;i<numOfBlocks;i++){
+		if(checkCollision(blocks[i]->getCollider(),getCollider())){
+			posx-=velx;
+		}
+	}
+	posy+=vely;
 	return;
 }
 bool entity::collidedOver(rect* block){
@@ -129,17 +130,29 @@ bool entity::collidedOver(rect* block){
 	return false;
 }
 bool entity::hitBy(entity *e){
-	if( (posx+width)<e->getx() ){
+	if( (posx+width-1)<e->getx() ){
 		return false;
 	}
-	if( posx>(e->getx()+e->getw()) ){
+	if( (posx+1)>(e->getx()+e->getw()) ){
 		return false;
 	}
-	if( (posy+height)<e->gety() ){
+	if( (posy+height-1)<e->gety() ){
 		return false;
 	}
-	if( posy>(e->gety()+e->geth()) ){
+	if( (posy+1)>(e->gety()+e->geth()) ){
 		return false;
 	}
 	return true;
+}
+void entity::ground(rect** blocks,int numOfBlocks){
+	for(int i=0;i<numOfBlocks;i++){
+		if( (posx+width)>blocks[i]->getx() && posx<(blocks[i]->getx()+blocks[i]->getw() ) ){
+			if(posy<=blocks[i]->gety()&&posy+height>=blocks[i]->gety()){
+				posy=blocks[i]->gety()-height;
+			}
+		}
+	}
+}
+void entity::fall() {
+	vely=fallingVel;
 }

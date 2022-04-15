@@ -13,7 +13,7 @@ The height and width of the level will be calculated automatically based on this
 Have fun with this feature!
 
 # Killing Enemies
-By punching, you can kill the enemies. They follow you slowly from a distance (though only horizontally since they don't have gravity physics). Killing them awards you points.
+By punching, you can kill the enemies. They follow you slowly from a distance. They are stopped by walls and can't jump. Don't worry, they are unable to harm you in this version. Killing them awards you points.
 
 # Gameplay video
 https://www.youtube.com/watch?v=BH6g9s3bn-0

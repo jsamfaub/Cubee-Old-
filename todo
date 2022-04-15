@@ -2,3 +2,5 @@ logic:
 player with reference
 if(entity.collide(player)) ;
 if(entity.near(player,distance)) ;
+
+cubee website with version log (blog posts)
