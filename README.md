@@ -6,9 +6,14 @@ I do plan to make it a somewhat full game some time in the future.
 You modify the level1.lvl file in the data/levels/ folder to make a custom level.
 Zeros ('0') represent empty spaces,
 Hashtags ('#') represent blocks,
+RGB ('r','g','b') represent blocks of different colors (red,green,blue).
+Es ('e') represent enemies.
 And Ns ('n') are used to seperate every horizontal line (so there's one at the end of every line except the last).
 The height and width of the level will be calculated automatically based on this file.
 Have fun with this feature!
+
+# Killing Enemies
+By punching, you can kill the enemies. They follow you slowly from a distance (though only horizontally since they don't have gravity physics). Killing them awards you points.
 
 # Gameplay video
 https://www.youtube.com/watch?v=BH6g9s3bn-0
